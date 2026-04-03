@@ -1,4 +1,4 @@
-name: Deploy LinkRiseUp VPS
+name: Deploy Meivera VPS
 
 on:
   push:
@@ -16,15 +16,13 @@ jobs:
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
-  key: ${{ secrets.VPS_SSH_KEY }}
-
+          key: ${{ secrets.VPS_SSH_KEY }}
           port: ${{ secrets.VPS_PORT }}
           envs: APP_ENV_PRODUCTION
           script: |
             set -euo pipefail
             cd ${{ secrets.VPS_APP_DIR }}
 
-            # overwrite env from GitHub secret
             printf '%s' "$APP_ENV_PRODUCTION" > .env
             chmod 600 .env
 
